@@ -21,7 +21,7 @@ const TaskDetailsPage = ({ params }: { params: { taskId: string } }) => {
 
   const fetchTask = async () => {
     const docRef = doc(db, 'tasks', taskId);
-    const docSnap = getDoc(docRef);
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const taskData = docSnap.data();
       setTask({
