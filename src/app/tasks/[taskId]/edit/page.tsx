@@ -13,7 +13,9 @@ const EditTaskPage = ({ params }: { params: { taskId: string } }) => {
   const [timeTo, setTimeTo] = useState("");
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const router = useRouter();
-  const { taskId } = params;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-expect-error
+  const { taskId } = React.use(params);
 
   // Fetch the logged-in user's ID
   useEffect(() => {

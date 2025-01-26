@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Logout } from "@/lib/action";
 
 export default function RootLayout({
   children,
@@ -29,11 +30,14 @@ export default function RootLayout({
     return () => unsubscribe(); // Cleanup subscription when component unmounts
   }, []);
 
-  const handleLogout = () => {
-    // Clear the auth token or other login data
-    document.cookie =
-      "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    router.push("/login");
+  const handleLogout = async () => {
+    try {
+      Logout(); // Properly log out the user
+      setUserName(null);
+      router.push("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -48,33 +52,37 @@ export default function RootLayout({
                   <Link href="/dashboard">ToDo App</Link>
                 </h1>
                 {/* Navigation Tabs */}
-                <nav className="space-x-4">
-                  <Link
-                    href="/tasks"
-                    className="hover:text-gray-300 transition-colors"
-                  >
-                    All Tasks
-                  </Link>
-                  <Link
-                    href="/profile"
-                    className="hover:text-gray-300 transition-colors"
-                  >
-                    Profile
-                  </Link>
-                </nav>
+                {userName && (
+                  <nav className="space-x-4">
+                    <Link
+                      href="/tasks"
+                      className="hover:text-gray-300 transition-colors"
+                    >
+                      All Tasks
+                    </Link>
+                    <Link
+                      href="/profile"
+                      className="hover:text-gray-300 transition-colors"
+                    >
+                      Profile
+                    </Link>
+                  </nav>
+                )}
               </div>
 
-              {/* User Info & Logout Button */}
+              {/* User Info & Authentication Buttons */}
               <div className="flex items-center space-x-4">
-                {userName && (
-                  <span className="text-sm">Hello, {userName}</span> // Display user's name
-                )}
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
+                {userName ? (
+                  <>
+                    <span className="text-sm">Hello, {userName}</span>
+                    <button
+                      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : null}
               </div>
             </div>
           </header>

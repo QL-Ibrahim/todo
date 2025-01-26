@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
+  console.log(request, "request");
   const path = request.nextUrl.pathname;
   const token = request.cookies.get("authToken"); // Retrieve the auth token
   const isPublicPath = path === "/login" || path === "/signup";
@@ -13,6 +14,10 @@ export function middleware(request: NextRequest) {
 
   // Redirect non-logged-in users to login if they access protected paths
   if (!isPublicPath && !token) {
+    console.log(
+      NextResponse.redirect(new URL("/login", request.url)),
+      "ibrahim"
+    );
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

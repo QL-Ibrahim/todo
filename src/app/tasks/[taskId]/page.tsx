@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { db } from "../../../lib/firebase/config";
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { db } from '../../../lib/firebase/config';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 
 const TaskDetailsPage = ({ params }: { params: { taskId: string } }) => {
   const [task, setTask] = useState<{
@@ -20,7 +20,7 @@ const TaskDetailsPage = ({ params }: { params: { taskId: string } }) => {
   const { taskId } = React.use(params);
 
   const fetchTask = async () => {
-    const docRef = doc(db, "tasks", taskId);
+    const docRef = doc(db, 'tasks', taskId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const taskData = docSnap.data();
@@ -32,17 +32,17 @@ const TaskDetailsPage = ({ params }: { params: { taskId: string } }) => {
         timeTo: taskData.timeTo,
       });
     } else {
-      console.error("Task not found!");
+      console.error('Task not found!');
     }
   };
 
   const handleDelete = async () => {
     try {
-      await deleteDoc(doc(db, "tasks", taskId));
-      alert("Task deleted successfully!");
-      router.push("/tasks");
+      await deleteDoc(doc(db, 'tasks', taskId));
+      alert('Task deleted successfully!');
+      router.push('/tasks');
     } catch (error) {
-      console.error("Error deleting task:", error);
+      console.error('Error deleting task:', error);
     }
   };
 
