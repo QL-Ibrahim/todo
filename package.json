@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-   "prepare": "echo 'Husky hooks initialized manually.'"
+    "prepare": "echo 'Husky hooks initialized manually.'"
   },
   "dependencies": {
     "@firebase/app": "^0.10.16",

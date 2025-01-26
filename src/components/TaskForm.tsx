@@ -32,7 +32,7 @@ export const TaskForm: React.FC<{
         description,
         timeFrom,
         timeTo,
-        new Date().toISOString()
+        new Date().toISOString(),
       );
       const collectionRef = collection(db, "tasks");
       const docRef = await addDoc(collectionRef, {

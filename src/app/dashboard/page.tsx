@@ -66,7 +66,7 @@ export default function DashboardPage() {
       collection(db, "tasks"),
       where("userId", "==", userId),
       orderBy("createdAt", "desc"),
-      limit(5) // Fetch only 5 documents
+      limit(5), // Fetch only 5 documents
     );
     onSnapshot(q, (snapshot) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

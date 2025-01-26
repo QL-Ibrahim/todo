@@ -14,7 +14,7 @@ export const Login = async (email: string, password: string) => {
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
     console.log("User logged in successfully", userCredential.user);
 

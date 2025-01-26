@@ -54,7 +54,7 @@ const ProfilePage = () => {
       await setDoc(
         docRef,
         { name, email },
-        { merge: true } // Merge fields instead of overwriting the document
+        { merge: true }, // Merge fields instead of overwriting the document
       );
 
       // Update success state after everything is complete

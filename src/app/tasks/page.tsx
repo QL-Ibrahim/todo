@@ -42,7 +42,7 @@ const TasksPage = () => {
       const q = query(
         collection(db, "tasks"),
         where("userId", "==", currentUserId),
-        orderBy("createdAt", "desc")
+        orderBy("createdAt", "desc"),
       );
       const snapshot = await getDocs(q);
 
