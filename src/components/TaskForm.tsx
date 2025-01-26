@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { db } from "../lib/firebase/config";
 import { collection, addDoc } from "firebase/firestore";
-// import { log } from "console";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const TaskForm: React.FC<{
@@ -12,6 +11,13 @@ export const TaskForm: React.FC<{
   const [description, setDescription] = useState("");
   const [timeFrom, setTimeFrom] = useState("");
   const [timeTo, setTimeTo] = useState("");
+
+  function name(a = 1) {
+    if (a == 1) {
+      return "hello";
+    }
+  }
+  name();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
